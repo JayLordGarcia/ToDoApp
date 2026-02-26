@@ -45,12 +45,12 @@ function addTask() {
     }
 
     let li = document.createElement("li");
-    li.style.listStyleType = "disc"; // show bullet
-    li.style.display = "list-item";  // ensures bullet appears
-    li.style.textAlign = "left";     // left align bullet text
-    li.style.padding = "6px 0";      // spacing like input
-    li.style.height = "38px";        // same height as input
-    li.style.lineHeight = "38px";    // vertical center
+    li.style.listStyleType = "disc";
+    li.style.display = "list-item";
+    li.style.textAlign = "left";
+    li.style.padding = "6px 0"; 
+    li.style.height = "38px"; 
+    li.style.lineHeight = "38px";
 
     li.innerHTML = `
         <span onclick="toggleDone(this)" style="cursor:pointer;">${taskText}</span>
