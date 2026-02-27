@@ -1,20 +1,41 @@
-self.addEventListener('install', function(event) {
-    event.waitUntil(
-        caches.open('todo-cache').then(function(cache) {
-            return cache.addAll([
-                '/',
-                '/index.html',
-                '/manifest.json',
-                '/icon.png'
-            ]);
-        })
-    );
+const CACHE_NAME = 'todo-cache-v1';
+const ASSETS_TO_CACHE = [
+  '/',
+  '/index.html',
+  '/manifest.json',
+  '/icon192.png',
+  '/icon512.png'
+];
+
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(ASSETS_TO_CACHE))
+      .then(() => self.skipWaiting())
+  );
 });
 
-self.addEventListener('fetch', function(event) {
-    event.respondWith(
-        caches.match(event.request).then(function(response) {
-            return response || fetch(event.request);
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(
+        keys.map(key => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
         })
-    );
+      )
+    )
+  );
+  self.clients.claim();
+});
+
+
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(cachedResponse => cachedResponse || fetch(event.request))
+  );
 });
