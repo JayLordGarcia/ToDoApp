@@ -2,7 +2,7 @@
 <html>
 <head>
     <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#28a745">
+    <meta name="theme-color" content="#0d6efd">
     <title>To do list mobile app</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -20,19 +20,19 @@
 
 <body>
 
-    <h2 class="text-center mb-4">To Do List</h2>
+    <h2 class="text-center mb-4 text-primary">To Do List</h2>
 
     <div class="d-flex justify-content-center mb-3">
-    <div style="width: 300px;">
-        <input type="text"
-               id="taskInput"
-               class="form-control text-center"
-               placeholder="Enter a task">
+        <div style="width: 300px;">
+            <input type="text"
+                   id="taskInput"
+                   class="form-control text-center"
+                   placeholder="Enter a task">
+        </div>
+        <button class="btn btn-primary ms-2" onclick="addTask()">Add</button>
     </div>
-    <button class="btn btn-success ms-2" onclick="addTask()">Add</button>
-</div>
 
-<ul id="taskList" class="list-group" style="width: 300px; margin: 0 auto; padding-left: 20px;"></ul>
+    <ul id="taskList" class="list-group" style="width: 300px; margin: 0 auto; padding-left: 20px;"></ul>
 
 <script>
 function addTask() {
@@ -75,6 +75,7 @@ function toggleDone(span) {
 </script>
 
 </body>
+
 <script>
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
